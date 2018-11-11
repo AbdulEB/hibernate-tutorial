@@ -22,7 +22,7 @@ public class CreateEmployeeDemo {
 		try {
 			//create a employee object
 			System.out.println("Create new employee object...");
-			Employee tempEmployee1 = new Employee("P", "Skills", "Raptors");
+			Employee tempEmployee1 = new Employee("P", "Skills", "Toronto Raptors");
 			Employee tempEmployee2 = new Employee("Adam", "T", "Vikings");
 			Employee tempEmployee3 = new Employee("John", "T", "Maple Leafs");
 			Employee tempEmployee4 = new Employee("Chris", "Ronaldo", "Juventus");
