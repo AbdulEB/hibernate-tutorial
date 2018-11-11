@@ -36,12 +36,7 @@ public class InstructorDetail {
 	@Column(name="hobby")
 	private String hobby;
 	
-	//add new field for instructor (also add getter/setters)
-	//add @OneToOne annotation
 	
-	@OneToOne(mappedBy="instructorDetail", 
-			cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	private Instructor instructor;
 	
 	public InstructorDetail() {
 		
@@ -80,15 +75,6 @@ public class InstructorDetail {
 	public String toString() {
 		return "InstructorDetail [id=" + id + ", youtubeChannel=" + youtubeChannel + ", hobby=" + hobby + "]";
 	}
-
-	public Instructor getInstructor() {
-		return instructor;
-	}
-
-	public void setInstructor(Instructor instructor) {
-		this.instructor = instructor;
-	}
-	
 	
 	
 }
