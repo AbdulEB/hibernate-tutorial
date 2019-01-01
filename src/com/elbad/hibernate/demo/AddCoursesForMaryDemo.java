@@ -7,8 +7,10 @@ import org.hibernate.cfg.Configuration;
 import com.elbad.hibernate.demo.entity.Course;
 import com.elbad.hibernate.demo.entity.Instructor;
 import com.elbad.hibernate.demo.entity.InstructorDetail;
+import com.elbad.hibernate.demo.entity.Review;
+import com.elbad.hibernate.demo.entity.Student;
 
-public class GetInstructorCoursesDemo {
+public class AddCoursesForMaryDemo {
 
 	public static void main(String[] args) {
 		
@@ -18,6 +20,8 @@ public class GetInstructorCoursesDemo {
 				.addAnnotatedClass(Instructor.class)
 				.addAnnotatedClass(InstructorDetail.class)
 				.addAnnotatedClass(Course.class)
+				.addAnnotatedClass(Review.class)
+				.addAnnotatedClass(Student.class)
 				.buildSessionFactory();
 		
 		//create session
@@ -27,16 +31,27 @@ public class GetInstructorCoursesDemo {
 			//start a transaction
 			session.beginTransaction();
 			
-			//get the instructor from db
-			int theId = 1;
+			//get the student mary from database
+			int studentId = 2;
+			Student tempStudent = session.get(Student.class, studentId);
 			
-			Instructor tempInstructor = session.get(Instructor.class, theId);
+			System.out.println("\nLoaded student: " + tempStudent);
+			System.out.println("Courses: " + tempStudent.getCourses());
 			
-			System.out.println("Instructor: " + tempInstructor);
+			//create more courses
+			Course tempCourse1 = new Course("Rubik's Cube - How to Speed Cube");
+			Course tempCourse2 = new Course("Atari 2600 - Game Development");
 			
-			//get course for the instructor
-			System.out.println("Courses: " + tempInstructor.getCourses());
+			//add student to courses
+			tempCourse1.addStudent(tempStudent);
+			tempCourse2.addStudent(tempStudent);
 			
+			//save the courses
+			System.out.println("\nSaving the course ...");
+			session.save(tempCourse1);
+			session.save(tempCourse2);
+			
+						
 			//commit transaction
 			session.getTransaction().commit();
 			

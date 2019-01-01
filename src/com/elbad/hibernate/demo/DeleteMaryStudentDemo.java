@@ -8,8 +8,9 @@ import com.elbad.hibernate.demo.entity.Course;
 import com.elbad.hibernate.demo.entity.Instructor;
 import com.elbad.hibernate.demo.entity.InstructorDetail;
 import com.elbad.hibernate.demo.entity.Review;
+import com.elbad.hibernate.demo.entity.Student;
 
-public class DeleteCourseAndReviewsDemo {
+public class DeleteMaryStudentDemo {
 
 	public static void main(String[] args) {
 		
@@ -20,6 +21,7 @@ public class DeleteCourseAndReviewsDemo {
 				.addAnnotatedClass(InstructorDetail.class)
 				.addAnnotatedClass(Course.class)
 				.addAnnotatedClass(Review.class)
+				.addAnnotatedClass(Student.class)
 				.buildSessionFactory();
 		
 		//create session
@@ -29,21 +31,17 @@ public class DeleteCourseAndReviewsDemo {
 			//start a transaction
 			session.beginTransaction();
 			
-			// get the course
-			int theId = 10;
-			Course tempCourse = session.get(Course.class, theId);
+			//get the student mary from database
+			int studentId = 2;
+			Student tempStudent = session.get(Student.class, studentId);
 			
-			// print the course
-			System.out.println("Deleting the course ...");
-			System.out.println(tempCourse);
+			System.out.println("\nLoaded student: " + tempStudent);
+			System.out.println("Courses: " + tempStudent.getCourses());
 			
-			// print the course reviews
-			System.out.println(tempCourse.getReviews());
-			
-			//delete the course
-			session.delete(tempCourse);
-						
-			
+			//delete student
+			System.out.println("\nDeleting student: " + tempStudent);
+			session.delete(tempStudent);
+									
 			//commit transaction
 			session.getTransaction().commit();
 			
